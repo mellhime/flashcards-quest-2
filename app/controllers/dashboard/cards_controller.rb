@@ -10,8 +10,7 @@ module Dashboard
       @card = Card.new
     end
 
-    def edit
-    end
+    def edit; end
 
     def create
       @card = current_user.cards.build(card_params)

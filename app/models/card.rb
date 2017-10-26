@@ -3,8 +3,9 @@ require 'super_memo'
 class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :block
-  validates :user_id, presence: true
   before_validation :set_review_date_as_now, on: :create
+
+  validates :user_id, presence: true
   validate :texts_are_not_equal
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
@@ -36,7 +37,7 @@ class Card < ActiveRecord::Base
   end
 
   def self.pending_cards_notification
-    users = User.where.not(email: nil)
+    users = User.all
     users.each do |user|
       if user.cards.pending.any?
         CardsMailer.pending_cards_notification(user.email).deliver
