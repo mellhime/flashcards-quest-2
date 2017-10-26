@@ -1,9 +1,8 @@
 == README
 
-{<img src="https://travis-ci.org/elavretskiy/flashcards.svg?branch=seventh-task"
-alt="Build Status" />}[https://travis-ci.org/elavretskiy/flashcards]
+[![Build Status](https://travis-ci.org/mellhime/flashcards-quest-2.svg?branch=master)](https://travis-ci.org/mellhime/flashcards-quest-2)
 
-{<img src="https://codeclimate.com/repos/551d5933695680514c00019c/badges/20539730e3e119e4d337/gpa.svg" />}[https://codeclimate.com/repos/551d5933695680514c00019c/feed]
+[![Maintainability](https://api.codeclimate.com/v1/badges/b00e56d999ef2a3ac6d1/maintainability)](https://codeclimate.com/github/mellhime/flashcards-quest-2/maintainability)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

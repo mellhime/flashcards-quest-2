@@ -4,6 +4,7 @@ en:
   translated_text_label: 'Translation'
   current_card_label: 'Current card'
   check_card_button: 'Check'
+  delete_user: User has been deleted
   no_review_card_text: 'You have studied all available cards.
       Expect the date of revision.'
   registration_label: 'Registration'
@@ -36,6 +37,8 @@ en:
   log_out_is_successful_notice: 'Log out is successful.'
   log_out_failed_provider_alert: "Log out of your account %{provider} failed."
   please_log_in: 'Please log in.'
+  not_found: Page is not found
+  update_profile: Successfully updated
 
   activerecord:
       errors:

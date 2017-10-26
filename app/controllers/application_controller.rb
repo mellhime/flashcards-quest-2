@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true, with: :exception
   before_action :set_locale
+  before_action :require_login, except: [:not_authenticated]
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   private
 
@@ -24,5 +26,14 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options = {})
     { locale: I18n.locale }.merge options
+  end
+
+  def not_authenticated
+    redirect_to login_path, alert: t(:please_log_in)
+  end
+
+  def not_found
+    flash[:alert] = t(:not_found)
+    redirect_to root_path
   end
 end
