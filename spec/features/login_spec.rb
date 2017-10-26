@@ -5,7 +5,7 @@ include LoginHelper
 describe 'password authentication' do
   describe 'register' do
     before do
-      visit root_path
+      visit new_user_path
     end
 
     it 'register TRUE' do
@@ -48,7 +48,7 @@ describe 'password authentication' do
     end
 
     it 'require_login root' do
-      expect(page).to have_content 'Добро пожаловать.'
+      expect(page).to have_content 'Пожалуйста авторизуйтесь.'
     end
 
     it 'authentication TRUE' do
