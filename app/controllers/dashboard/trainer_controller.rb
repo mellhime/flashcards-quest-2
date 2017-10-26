@@ -5,9 +5,7 @@ module Dashboard
       if params[:id]
         @card = current_user.cards.find(params[:id])
       else
-        scope = current_user.current_block.nil? ? current_user.cards : current_user.current_block.cards
-        @card = scope.pending.first
-        @card ||= scope.repeating.first
+        @card = User.choose_card(current_user)
       end
 
       respond_to do |format|

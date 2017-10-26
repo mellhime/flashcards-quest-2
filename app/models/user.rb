@@ -23,4 +23,10 @@ class User < ActiveRecord::Base
   def set_current_block(block)
     update_attribute(:current_block_id, block.id)
   end
+
+  def self.choose_card(current_user)
+    scope = current_user.current_block.nil? ? current_user.cards : current_user.current_block.cards
+    card = scope.pending.first
+    card ||= scope.repeating.first
+  end
 end
