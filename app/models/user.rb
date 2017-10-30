@@ -26,6 +26,6 @@ class User < ActiveRecord::Base
 
   def self.choose_card(current_user)
     scope = current_user.current_block.nil? ? current_user.cards : current_user.current_block.cards
-    card = scope.pending.first || scope.repeating.first
+    scope.pending.first || scope.repeating.first
   end
 end

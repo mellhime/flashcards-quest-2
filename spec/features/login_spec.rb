@@ -4,8 +4,6 @@ include LoginHelper
 
 describe 'password authentication' do
 
-  after(:all) { User.delete_all }
-
   describe 'register' do
     before do
       visit root_path
@@ -28,7 +26,6 @@ describe 'password authentication' do
 
     it 'e-mail has already been taken' do
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
-      #expect(page).to have_content 'Не верный формат.'
       click_link 'Log out'
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
       expect(page).to have_content 'Не уникальное значение.'
