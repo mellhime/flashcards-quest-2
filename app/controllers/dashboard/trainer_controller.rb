@@ -2,11 +2,11 @@ module Dashboard
   class TrainerController < ApplicationController
 
     def index
-      if params[:id]
-        @card = current_user.cards.find(params[:id])
-      else
-        @card = User.choose_card(current_user)
-      end
+      @card = if params[:id]
+                current_user.cards.find(params[:id])
+              else
+                User.choose_card(current_user)
+              end
 
       respond_to do |format|
         format.html

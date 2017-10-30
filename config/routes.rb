@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     resources :blocks do
       member do
         put 'set_as_current'
-        put 'reset_as_current'
       end
     end
 
