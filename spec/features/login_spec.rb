@@ -3,6 +3,7 @@ require 'support/helpers/login_helper.rb'
 include LoginHelper
 
 describe 'password authentication' do
+
   describe 'register' do
     before do
       visit root_path
@@ -25,7 +26,7 @@ describe 'password authentication' do
 
     it 'e-mail has already been taken' do
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
-      click_link 'Выйти'
+      click_link 'Log out'
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
       expect(page).to have_content 'Не уникальное значение.'
     end
@@ -48,7 +49,7 @@ describe 'password authentication' do
     end
 
     it 'require_login root' do
-      expect(page).to have_content 'Добро пожаловать.'
+      expect(page).to have_content 'Пожалуйста авторизуйтесь.'
     end
 
     it 'authentication TRUE' do
@@ -81,8 +82,8 @@ describe 'password authentication' do
     end
 
     it 'home page' do
-      click_link 'en'
-      expect(page).to have_content 'Welcome.'
+      click_link 'ru'
+      expect(page).to have_content 'Флэшкарточкер'
     end
 
     it 'register TRUE' do
@@ -105,7 +106,7 @@ describe 'password authentication' do
       fill_in 'user[password]', with: '12345'
       fill_in 'user[password_confirmation]', with: '12345'
       click_button 'Сохранить'
-      expect(page).to have_content 'Профиль пользователя успешно обновлен.'
+      expect(page).to have_content 'Successfully updated'
     end
 
     it 'authentication TRUE' do

@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   has_many :blocks, dependent: :destroy
   has_many :authentications, dependent: :destroy
   belongs_to :current_block, class_name: 'Block'
-  before_create :set_default_locale
-  before_validation :set_default_locale, on: :create
 
   accepts_nested_attributes_for :authentications
 
@@ -17,9 +15,6 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :email, uniqueness: true, presence: true,
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
-  validates :locale, presence: true,
-            inclusion: { in: I18n.available_locales.map(&:to_s),
-                         message: 'Выберите локаль из выпадающего списка.' }
 
   def has_linked_github?
     authentications.where(provider: 'github').present?
@@ -29,13 +24,8 @@ class User < ActiveRecord::Base
     update_attribute(:current_block_id, block.id)
   end
 
-  def reset_current_block
-    update_attribute(:current_block_id, nil)
-  end
-
-  private
-
-  def set_default_locale
-    self.locale = I18n.locale.to_s
+  def self.choose_card(current_user)
+    scope = current_user.current_block.nil? ? current_user.cards : current_user.current_block.cards
+    scope.pending.first || scope.repeating.first
   end
 end
