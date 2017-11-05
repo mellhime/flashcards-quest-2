@@ -11,25 +11,28 @@ sudo yum groupinstall -y "Development Tools" > /dev/null
 echo "Installing rvm and Configuring ruby 2.4"
 sudo curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
 \curl -sSL https://get.rvm.io | bash -s stable
-gpasswd -a vagrant rvm
 source /etc/profile.d/rvm.sh
 rvm install 2.4.1
 
 echo "Installing NodeJS"
+curl --silent --location https://rpm.nodesource.com/setup_6.x | sudo bash -
 sudo yum install -y nodejs > /dev/null
 
 echo "Installing Postgresql"
-sudo yum install -y postgresql postgresql-contrib postgresql-server \
-postgresql-devel > /dev/null
+sudo yum install -y postgresql postgresql-contrib postgresql-server
 
 echo "Creating PostgresDB and Initializing Postgresql"
-sudo postgresql-setup initdb && systemctl start postgresql
-sudo systemctl enable postgresql
-
-echo "Creating user and vagrant database"
-sudo -u postgres createdb vagrant
+sudo yum -y install http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-2.noarch.rpm
+sudo yum -y install postgresql-devel postgresql95-server postgresql95-contrib
+sudo /usr/pgsql-9.5/bin/postgresql95-setup initdb
+sudo systemctl start postgresql-9.5.service
+sudo systemctl enable postgresql-9.5.service
+sudo -u postgres createdb library2_development
+sudo -u postgres createuser vagrant -s
 
 echo "Go to project folder, install bundler"
 cd /vagrant
+gem install bundler
 bundle install
-rails s
+rake db:migrate
+rails s -b 0.0.0.0

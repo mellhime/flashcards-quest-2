@@ -7,11 +7,8 @@
                 input_html: { class: 'form-control', required: true } %>
     <%= f.input :image, as: :file, label: 'Изображение' %>
     <%= f.input :block_id, collection: current_user.blocks.all.order('title'),
-                      prompt: 'Выберите колоду', label: 'Колоды', 
+                      prompt: 'Выберите колоду', label: 'Колоды',
                       input_html: { class: 'form-control', required: true } %>
-    <div id="test" style="display:none;">
-    <%= text_field_tag("test") %>                  
-    </div>
 
   <% unless card.image_url.nil? %>
       <%= f.input :remove_image, as: :boolean, label: 'Удалить изображение' %>
