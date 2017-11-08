@@ -32,6 +32,10 @@ gem 'routing-filter'
 gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'puma'
+gem 'rails_admin'
+gem 'rolify'
+gem 'pundit'
+gem "rails_admin_pundit", :github => "sudosu/rails_admin_pundit"
 
 group :development, :test do
   gem 'rspec-rails'
