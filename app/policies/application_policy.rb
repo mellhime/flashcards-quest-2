@@ -52,24 +52,8 @@ class ApplicationPolicy
   end
 
   def rails_admin?(action)
-    case action
-    when :dashboard
-      user.has_role?(:admin)
-    when :index
-      user.has_role?(:admin)
-    when :show
-      user.has_role?(:admin)
-    when :new
-      user.has_role?(:admin)
-    when :edit
-      user.has_role?(:admin)
-    when :destroy
-      user.has_role?(:admin)
-    when :export
-      user.has_role?(:admin)
-    when :history
-      user.has_role?(:admin)
-    when :show_in_app
+    actions = [:dashboard, :index, :show, :new, :edit, :destroy, :export, :history, :show_in_app]
+    if actions.include? action
       user.has_role?(:admin)
     else
       raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."

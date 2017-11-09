@@ -24,7 +24,7 @@ describe 'password authentication' do
       expect(page).to have_content 'Не верный формат.'
     end
 
-    xit 'e-mail has already been taken' do
+    it 'e-mail has already been taken' do
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
       click_link 'Log out'
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
