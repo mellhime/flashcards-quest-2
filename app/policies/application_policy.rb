@@ -53,10 +53,7 @@ class ApplicationPolicy
 
   def rails_admin?(action)
     actions = [:dashboard, :index, :show, :new, :edit, :destroy, :export, :history, :show_in_app]
-    if actions.include? action
-      user.has_role?(:admin)
-    else
-      raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."
-    end
+    raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}." unless actions.include? action
+    user.has_role?(:admin)
   end
 end
