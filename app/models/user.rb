@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   has_many :cards, dependent: :destroy
   has_many :blocks, dependent: :destroy
   has_many :authentications, dependent: :destroy
@@ -15,6 +16,12 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :email, uniqueness: true, presence: true,
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
+
+  after_create :assign_default_role
+
+  def assign_default_role
+    add_role(:user) if self.roles.blank?
+  end
 
   def has_linked_github?
     authentications.where(provider: 'github').present?

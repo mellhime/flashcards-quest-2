@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   protect_from_forgery prepend: true, with: :exception
   before_action :set_locale
   before_action :require_login, except: [:not_authenticated]
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from Pundit::NotAuthorizedError, with: :not_admin
 
   private
 
@@ -29,11 +31,16 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to login_path, alert: t(:please_log_in)
+    redirect_to main_app.login_path, alert: t(:please_log_in)
   end
 
   def not_found
     flash[:alert] = t(:not_found)
     redirect_to root_path
+  end
+
+  def not_admin
+    flash[:danger] = "Only admin can view this page"
+    redirect_to main_app.root_path
   end
 end
