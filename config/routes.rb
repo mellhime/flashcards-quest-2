@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'main#index'
 
+  get 'photos/search' => 'photos#search'
+
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]
     resources :users, only: [:new, :create]
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   scope module: 'dashboard' do
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy
+
     post 'logout' => 'user_sessions#destroy', :as => :logout
 
     resources :cards

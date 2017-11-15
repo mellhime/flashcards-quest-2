@@ -6,6 +6,7 @@
     <%= f.input :translated_text, as: :text, label: 'Перевод',
                 input_html: { class: 'form-control', required: true } %>
     <%= f.input :image, as: :file, label: 'Изображение' %>
+    <%= render 'flickr_search' %>
     <%= f.input :block_id, collection: current_user.blocks.all.order('title'),
                       prompt: 'Выберите колоду', label: 'Колоды',
                       input_html: { class: 'form-control', required: true } %>
