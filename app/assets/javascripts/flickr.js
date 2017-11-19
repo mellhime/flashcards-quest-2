@@ -1,3 +1,15 @@
+function chooseImage() {
+  var image_input = $("#image_id");
+  console.log(image_input);
+
+  $.ajax({
+
+    dataType: 'json',
+    url: '/cards/new',
+    data: { "image" : image_input.val() },
+  });
+};
+
 $(document).ready(function() {
   $("#target").on("click", function() {
     $("#search").show();
@@ -5,20 +17,18 @@ $(document).ready(function() {
   });
 
   $("#search_button").on("click", function() {
-    // console.log("success");
     var search_input = $("#search_input");
     $('#search #images').remove();
 
     $.ajax({
+
       dataType: 'json',
-      quietMillis: 1500,
       url: '/photos/search',
       data: { "search_input" : search_input.val() },
       success: function(data){
         data.map( function(image) {
-          console.log(image);
-          $('#search').append('<div id="images"><img src="'+ image +'" alt="image" /></div>');
-        })
+          $('#search').append('<img id="image_id" src="'+ image +'" alt="image" onclick="chooseImage();" />');
+        });
       } 
     });
   });

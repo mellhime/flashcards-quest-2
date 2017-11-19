@@ -3,18 +3,14 @@
 </div>
 <div class="row">
     <%= form_tag '/photos/search', :method => "get" do %>
-        <% if flash[:error_msg] %>
-          <div class="alert alert-danger" role="alert"><%= flash.now[:error_msg] %></div>
-        <% end %>
-
-        <div class="col-lg-6">
-          <div id="search" style="display: none;">
-            <%= text_field_tag(:search_input, params[:search_input], class: 'form-control') %>
+      <div class="col-lg-6">
+        <div id="search" style="display: none;">
+          <%= text_field_tag(:search_input, params[:search_input], class: 'form-control') %>
             <div id="search_button">
-            <%= button_tag("Search!", class: 'btn btn-default') %>
+              <%= button_tag("Search!", class: 'btn btn-default') %>
             </div>
           </div>
         </div>
     <% end %>
 </div>
-  <br />
+<br />

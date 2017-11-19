@@ -1,6 +1,6 @@
 module Dashboard
   class CardsController < ApplicationController
-    before_action :set_card, only: [:destroy, :edit, :update]
+    before_action :set_card, only: [:show, :destroy, :edit, :update]
 
     def index
       @cards = current_user.cards.all.order('review_date')
@@ -10,19 +10,18 @@ module Dashboard
       @card = Card.new
     end
 
+    def show; end
+
     def edit; end
 
     def create
-      @card = current_user.cards.build(card_params)
+      binding.pry
+      card_params[:image] = params[:image]
+      @card = Card.new(card_params.merge(user_id: current_user.id))
       if @card.save
         redirect_to cards_path
       else
         render 'new'
-      end
-
-      respond_to do |format|
-        format.html
-        format.js
       end
     end
 
