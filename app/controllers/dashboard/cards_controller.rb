@@ -15,7 +15,6 @@ module Dashboard
     def edit; end
 
     def create
-      binding.pry
       card_params[:image] = params[:image]
       @card = Card.new(card_params.merge(user_id: current_user.id))
       if @card.save

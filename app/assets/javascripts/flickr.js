@@ -8,7 +8,7 @@ function chooseImage() {
     url: '/cards/new',
     data: { "image" : image_input.val() },
   });
-};
+}
 
 $(document).ready(function() {
   $("#target").on("click", function() {
