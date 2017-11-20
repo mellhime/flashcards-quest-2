@@ -1,13 +1,14 @@
 function chooseImage() {
-  var image_input = $("#image_id");
+  var image_input = $("#image_id").attr('src');
   console.log(image_input);
+  $("#card_image_url").val(image_input);
 
-  $.ajax({
+  // $.ajax({
 
-    dataType: 'json',
-    url: '/cards/new',
-    data: { "image" : image_input.val() },
-  });
+  //   dataType: 'json',
+  //   url: '/cards/new',
+  //   data: { "image" : image_input.val() },
+  // });
 }
 
 $(document).ready(function() {

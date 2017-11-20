@@ -4,6 +4,7 @@ class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :block
   before_validation :set_review_date_as_now, on: :create
+  before_save :download_remote_image, if: :image_url_provided?
 
   validates :user_id, presence: true
   validate :texts_are_not_equal
@@ -43,6 +44,14 @@ class Card < ActiveRecord::Base
         CardsMailer.pending_cards_notification(user.email).deliver
       end
     end
+  end
+
+  def image_url_provided?
+    !image_url.blank?
+  end
+
+  def download_remote_image
+    self.image = URI.parse(image_url).to_s
   end
 
   protected

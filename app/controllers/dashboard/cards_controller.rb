@@ -15,7 +15,6 @@ module Dashboard
     def edit; end
 
     def create
-      card_params[:image] = params[:image]
       @card = Card.new(card_params.merge(user_id: current_user.id))
       if @card.save
         redirect_to cards_path
@@ -45,7 +44,7 @@ module Dashboard
 
     def card_params
       params.require(:card).permit(:original_text, :translated_text, :review_date,
-                                   :image, :remove_image, :block_id)
+                                   :image, :remove_image, :block_id, :image_url)
     end
   end
 end
