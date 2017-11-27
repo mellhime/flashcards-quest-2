@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   filter :locale
 
   root 'main#index'
-
   get 'photos/search' => 'photos#search'
 
   scope module: 'home' do

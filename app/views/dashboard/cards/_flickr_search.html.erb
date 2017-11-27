@@ -7,7 +7,9 @@
         <div id="search" style="display: none;">
           <%= text_field_tag(:search_input, params[:search_input], class: 'form-control') %>
             <div id="search_button">
-              <%= button_tag("Search!", class: 'btn btn-default') %>
+              <%= button_tag("Search!") %>
+            </div>
+            <div id="search_results">
             </div>
           </div>
         </div>

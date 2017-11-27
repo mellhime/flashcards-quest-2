@@ -1,14 +1,5 @@
-function chooseImage() {
-  var image_input = $("#image_id").attr('src');
-  console.log(image_input);
-  $("#card_image_url").val(image_input);
-
-  // $.ajax({
-
-  //   dataType: 'json',
-  //   url: '/cards/new',
-  //   data: { "image" : image_input.val() },
-  // });
+function chooseImage(image) {
+  $("#card_image_url").val(image.src);
 }
 
 $(document).ready(function() {
@@ -19,7 +10,6 @@ $(document).ready(function() {
 
   $("#search_button").on("click", function() {
     var search_input = $("#search_input");
-    $('#search #images').remove();
 
     $.ajax({
 
@@ -28,7 +18,8 @@ $(document).ready(function() {
       data: { "search_input" : search_input.val() },
       success: function(data){
         data.map( function(image) {
-          $('#search').append('<img id="image_id" src="'+ image +'" alt="image" onclick="chooseImage();" />');
+          var image_id = image.slice(-16).substr(0, 10);
+          $('#search_results').append('<img id="image'+ image_id +'" src="'+ image +'" alt="image" onclick="chooseImage(this);" />');
         });
       } 
     });
