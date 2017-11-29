@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   filter :locale
 
   root 'main#index'
+  
   get 'photos/search' => 'photos#search'
+  resources :photos, only: :search
 
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]

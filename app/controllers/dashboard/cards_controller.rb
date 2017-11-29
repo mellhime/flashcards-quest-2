@@ -15,8 +15,7 @@ module Dashboard
     def edit; end
 
     def create
-      @card = Card.new(card_params.merge(user_id: current_user.id))
-      @card.remote_image_url = card_params[:image_url]
+      @card = Card.new(card_params.merge(user_id: current_user.id, remote_image_url: card_params[:image_url]))
       if @card.save
         redirect_to cards_path
       else
