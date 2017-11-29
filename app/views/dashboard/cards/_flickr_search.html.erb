@@ -1,18 +1,20 @@
-<div id="target">
-  <%= button_tag("Search in Flickr") %>
-</div>
-<div class="row">
-    <%= form_tag '/photos/search', :method => "get" do %>
-      <div class="col-lg-6">
-        <div id="search" style="display: none;">
-          <%= text_field_tag(:search_input, params[:search_input], class: 'form-control') %>
-            <div id="search_button">
-              <%= button_tag("Search!") %>
-            </div>
-            <div id="search_results">
+<div class="form-group">
+  <div id="target">
+    <%= button_tag("Search in Flickr", type: 'button') %>
+  </div>
+  <div class="row">
+      <%= form_tag '/photos/search', :method => "get" do %>
+        <div class="col-lg-6">
+          <div id="search" style="display: none;">
+            <%= text_field_tag(:search_input, params[:search_input], class: 'form-control') %>
+              <div id="search_button">
+                <%= button_tag("Search!", type: 'button') %>
+              </div>
+              <div id="search_results">
+              </div>
             </div>
           </div>
-        </div>
-    <% end %>
+      <% end %>
+  </div>
+  <br />
 </div>
-<br />
