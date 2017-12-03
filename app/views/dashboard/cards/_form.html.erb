@@ -6,11 +6,13 @@
     <%= f.input :translated_text, as: :text, label: 'Перевод',
                 input_html: { class: 'form-control', required: true } %>
     <%= f.input :image, as: :file, label: 'Изображение' %>
+    <%= render 'flickr_search' %>
+    <%= f.input :image_url, as: :hidden %>
     <%= f.input :block_id, collection: current_user.blocks.all.order('title'),
                       prompt: 'Выберите колоду', label: 'Колоды',
                       input_html: { class: 'form-control', required: true } %>
 
-  <% unless card.image_url.nil? %>
+    <% unless card.image_url.nil? %>
       <%= f.input :remove_image, as: :boolean, label: 'Удалить изображение' %>
       <div class="row">
         <div class="col-xs-6 col-md-4 card_image">
@@ -19,7 +21,7 @@
           </p>
         </div>
       </div>
-  <% end %>
+    <% end %>
+    <%= f.button :submit, 'Сохранить', class: 'btn btn-default' %>
   </div>
-  <%= f.button :submit, 'Сохранить', class: 'btn btn-default' %>
 <% end %>

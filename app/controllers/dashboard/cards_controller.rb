@@ -1,6 +1,6 @@
 module Dashboard
   class CardsController < ApplicationController
-    before_action :set_card, only: [:destroy, :edit, :update]
+    before_action :set_card, only: [:show, :destroy, :edit, :update]
 
     def index
       @cards = current_user.cards.all.order('review_date')
@@ -10,10 +10,12 @@ module Dashboard
       @card = Card.new
     end
 
+    def show; end
+
     def edit; end
 
     def create
-      @card = current_user.cards.build(card_params)
+      @card = Card.new(card_params.merge(user_id: current_user.id, remote_image_url: card_params[:image_url]))
       if @card.save
         redirect_to cards_path
       else
@@ -42,7 +44,7 @@ module Dashboard
 
     def card_params
       params.require(:card).permit(:original_text, :translated_text, :review_date,
-                                   :image, :remove_image, :block_id)
+                                   :image, :remove_image, :block_id, :image_url)
     end
   end
 end
